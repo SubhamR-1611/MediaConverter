@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // API Configuration (Update this URL after deploying your backend on Render/Railway)
   const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? ''
-    : 'https://your-backend-url.onrender.com';
+    : 'https://mediaconverter-7li5.onrender.com';
 
   // DOM Elements
   const platformView = document.getElementById('platform-view');
