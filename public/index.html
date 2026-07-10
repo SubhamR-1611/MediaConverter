@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediaConvert - Free Social Media Downloader</title>
+  <meta name="description" content="Convert and download videos and audio from YouTube, Instagram, and Snapchat to MP3 or MP4 format instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Animated Background Shapes -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="app-container">
+    <header class="app-header">
+      <h1 class="logo-text">Media<span>Convert</span></h1>
+      <p class="logo-subtext">Convert & download social media links in seconds</p>
+    </header>
+
+    <main class="main-card glass-panel">
+      <!-- VIEW 1: Platform Selection -->
+      <section id="platform-view" class="view active">
+        <h2 class="view-title">Select Platform</h2>
+        <p class="view-desc">Choose the platform you want to download from</p>
+        <div class="platform-grid">
+          <button class="platform-btn yt-theme" id="btn-yt">
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+            <span class="btn-label">YouTube</span>
+          </button>
+
+          <button class="platform-btn ig-theme" id="btn-ig">
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              </svg>
+            </div>
+            <span class="btn-label">Instagram</span>
+          </button>
+
+          <button class="platform-btn snap-theme" id="btn-snap">
+            <div class="icon-wrapper">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-3.136 0-5.88 1.764-5.88 4.704 0 .98.412 1.96 1.059 2.509-.177.059-.392.118-.588.118-.333 0-.686-.118-.941-.333-.314-.255-.726-.647-1.392-.647-.745 0-1.47.765-1.47 1.706 0 .549.275 1.02.824 1.333.274.157.627.275 1.098.275.294 0 .608-.059.882-.196.118-.059.255-.098.392-.098.216 0 .392.078.47.235.157.294.039.922-.647 1.549C4.549 12 2.725 12.824 2.725 14.863c0 .804.51 1.49 1.431 1.843.431.157.941.255 1.51.255.451 0 .902-.059 1.314-.176.216-.059.392-.02.49.118.255.333.451.98.667 1.647.255.804.588 1.863 1.627 2.451.784.451 1.765.745 3.235.745 1.47 0 2.451-.294 3.235-.745 1.039-.588 1.373-1.647 1.628-2.451.216-.667.412-1.314.667-1.647.098-.137.274-.176.49-.118.412.118.863.176 1.314.176.569 0 1.078-.098 1.51-.255.921-.353 1.431-1.039 1.431-1.843 0-2.039-1.824-2.863-3.078-3.922-.686-.627-.804-1.255-.647-1.549.078-.157.255-.235.47-.235.137 0 .274.039.392.098.274.137.588.196.882.196.47 0 .824-.118 1.098-.275.549-.314.824-.784.824-1.333 0-.941-.725-1.706-1.47-1.706-.667 0-1.078.392-1.392.647-.255.216-.608.333-.941.333-.196 0-.412-.059-.588-.118.647-.549 1.059-1.529 1.059-2.509C17.88 1.764 15.136 0 12 0z"/>
+              </svg>
+            </div>
+            <span class="btn-label">Snapchat</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Format Selection -->
+      <section id="format-view" class="view">
+        <h2 class="view-title">Choose Format</h2>
+        <p class="view-desc">Select whether you want to extract audio or download the video</p>
+        <div class="format-grid">
+          <button class="format-btn" id="btn-mp3">
+            <div class="format-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18V5l12-2v13"/>
+                <circle cx="6" cy="18" r="3"/>
+                <circle cx="18" cy="16" r="3"/>
+              </svg>
+            </div>
+            <span class="format-name">MP3</span>
+            <span class="format-subtext">For only Audio</span>
+          </button>
+
+          <button class="format-btn" id="btn-mp4">
+            <div class="format-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                <line x1="7" y1="2" x2="7" y2="22"/>
+                <line x1="17" y1="2" x2="17" y2="22"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <line x1="2" y1="7" x2="7" y2="7"/>
+                <line x1="2" y1="17" x2="7" y2="17"/>
+                <line x1="17" y1="17" x2="22" y2="17"/>
+                <line x1="17" y1="7" x2="22" y2="7"/>
+              </svg>
+            </div>
+            <span class="format-name">MP4</span>
+            <span class="format-subtext">For Video</span>
+          </button>
+        </div>
+        <button class="back-link" id="back-to-platforms">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-icon">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Change Platform
+        </button>
+      </section>
+
+      <!-- VIEW 3: Link Input -->
+      <section id="input-view" class="view">
+        <button class="back-link-top" id="back-to-formats">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-icon">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Back to Format
+        </button>
+        
+        <h2 class="view-title">Paste URL</h2>
+        <p class="view-desc" id="input-view-desc">Paste your link below to convert</p>
+
+        <!-- Input Field Container -->
+        <div class="input-container">
+          <div class="input-glow-border"></div>
+          <div class="input-wrapper">
+            <div class="input-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <input type="text" id="url-input" placeholder="Paste your link here..." autocomplete="off">
+            <button class="clear-btn" id="clear-input" aria-label="Clear input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Buttons for conversion -->
+        <div class="action-buttons-container">
+          <!-- MP3 Action Buttons -->
+          <div id="mp3-actions" class="action-group active">
+            <button class="action-btn primary-btn" id="btn-convert-mp3">
+              <span>Convert to MP3</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-arrow">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- MP4 Action Buttons -->
+          <div id="mp4-actions" class="action-group">
+            <button class="action-btn primary-btn" id="btn-convert-mp4-audio">
+              <span>With Audio Conversion</span>
+            </button>
+            <button class="action-btn secondary-btn" id="btn-convert-mp4-noaudio">
+              <span>Without Audio Conversion</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading / Progress State -->
+        <div class="status-container" id="status-container">
+          <div class="spinner-wrapper">
+            <div class="spinner"></div>
+            <div class="spinner-inner"></div>
+          </div>
+          <p class="status-text" id="status-text">Starting conversion...</p>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+          </div>
+        </div>
+
+        <!-- Success / Download State -->
+        <div class="download-container" id="download-container">
+          <div class="success-ring">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h3 class="success-title">Ready for Download!</h3>
+          <div class="media-details">
+            <span class="media-type-badge" id="media-badge">MP3</span>
+            <p class="media-title" id="download-title">Video title goes here</p>
+          </div>
+          <button class="action-btn download-btn" id="btn-download-file">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Download Now</span>
+          </button>
+          <button class="reset-btn" id="btn-convert-another">Convert Another Link</button>
+        </div>
+
+        <!-- Error State -->
+        <div class="error-container" id="error-container">
+          <div class="error-ring">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </div>
+          <h3 class="error-title">Conversion Failed</h3>
+          <p class="error-text" id="error-text">Something went wrong. Please check your link and try again.</p>
+          <button class="reset-btn" id="btn-try-again">Try Again</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>&copy; 2026 MediaConvert. Designed with premium aesthetics. For personal and educational use only.</p>
+    </footer>
+  </div>
+</body>
+</html>
