@@ -5,6 +5,8 @@ const fs = require('fs');
 const youtubedl = require('youtube-dl-exec');
 const ffmpegPath = require('ffmpeg-static');
 
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -95,6 +97,7 @@ async function runConversion(taskId, url, format, withAudio) {
         noWarnings: true,
         noCheckCertificates: true,
         preferFreeFormats: true,
+        userAgent: USER_AGENT,
       }, platform);
       task.title = sanitizeFilename(info.title || 'Downloaded_Media');
     } catch (metaError) {
@@ -111,6 +114,7 @@ async function runConversion(taskId, url, format, withAudio) {
       output: path.join(tempDir, `${taskId}.%(ext)s`),
       noWarnings: true,
       noCheckCertificates: true,
+      userAgent: USER_AGENT,
     };
 
     if (format === 'mp3') {
