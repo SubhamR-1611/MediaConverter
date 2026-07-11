@@ -169,7 +169,7 @@ async function runConversion(taskId, url, format, withAudio) {
                         "2. Close your browser completely (to unlock its cookie file) and click Convert again;\n\n" +
                         "OR: Export your Instagram cookies to a 'cookies.txt' file in Netscape format (using a browser extension like 'Get cookies.txt LOCALLY') and save it in the project root folder.";
       }
-    } else if (friendlyError.toLowerCase().includes('confirm you are not a bot') || friendlyError.toLowerCase().includes('sign in') || friendlyError.toLowerCase().includes('bot')) {
+    } else if (friendlyError.toLowerCase().includes('confirm you are not a bot') || friendlyError.toLowerCase().includes('sign in') || friendlyError.toLowerCase().includes('bot') || friendlyError.toLowerCase().includes('format is not available')) {
       if (isCloudServer) {
         friendlyError = "This download was blocked by bot-detection. Cloud provider IP addresses (like Render) are heavily rate-limited by YouTube.\n\n" +
                         "To resolve this, you must run this website locally on your computer, OR place a 'cookies.txt' file in your GitHub repository root folder and redeploy.";
