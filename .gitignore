@@ -1,5 +1,4 @@
 node_modules/
 temp/
-cookies.txt
 *.log
 .DS_Store
