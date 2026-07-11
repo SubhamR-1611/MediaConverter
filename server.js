@@ -98,6 +98,7 @@ async function runConversion(taskId, url, format, withAudio) {
         noCheckCertificates: true,
         preferFreeFormats: true,
         userAgent: USER_AGENT,
+        extractorArgs: 'youtube:player-client=ios,android',
       }, platform);
       task.title = sanitizeFilename(info.title || 'Downloaded_Media');
     } catch (metaError) {
@@ -115,6 +116,7 @@ async function runConversion(taskId, url, format, withAudio) {
       noWarnings: true,
       noCheckCertificates: true,
       userAgent: USER_AGENT,
+      extractorArgs: 'youtube:player-client=ios,android',
     };
 
     if (format === 'mp3') {
