@@ -57,17 +57,22 @@ async function runYtdlWithFallbacks(url, options, platform) {
     }
   }
 
-  // Try 3: Browser fallbacks (only for Instagram/Snapchat/YouTube to fetch authenticated pages)
-  const browsers = ['firefox', 'edge', 'chrome'];
-  for (const browser of browsers) {
-    try {
-      console.log(`[YTDL-Fallback] Retrying with cookies from browser: ${browser}...`);
-      const newOptions = { ...options, cookiesFromBrowser: browser };
-      return await youtubedl(url, newOptions);
-    } catch (err) {
-      lastError = err;
-      console.log(`[YTDL-Fallback] Download with cookies from ${browser} failed: ${err.message.substring(0, 150)}...`);
+  // Try 3: Browser fallbacks (ONLY on local environment; skip if running on Render/production server)
+  const isCloudServer = process.env.RENDER || process.env.NODE_ENV === 'production' || __dirname.includes('render') || __dirname.includes('opt');
+  if (!isCloudServer) {
+    const browsers = ['firefox', 'edge', 'chrome'];
+    for (const browser of browsers) {
+      try {
+        console.log(`[YTDL-Fallback] Retrying with cookies from browser: ${browser}...`);
+        const newOptions = { ...options, cookiesFromBrowser: browser };
+        return await youtubedl(url, newOptions);
+      } catch (err) {
+        lastError = err;
+        console.log(`[YTDL-Fallback] Download with cookies from ${browser} failed: ${err.message.substring(0, 150)}...`);
+      }
     }
+  } else {
+    console.log(`[YTDL-Fallback] Running on cloud server. Skipping browser cookie database fallbacks.`);
   }
 
   throw lastError;
@@ -152,11 +157,25 @@ async function runConversion(taskId, url, format, withAudio) {
     
     // Customize the error message if it fails due to authentication/cookies on Instagram
     let friendlyError = error.message || 'Unknown error occurred during conversion';
+    const isCloudServer = process.env.RENDER || process.env.NODE_ENV === 'production' || __dirname.includes('render') || __dirname.includes('opt');
+
     if (platform === 'instagram' && (friendlyError.includes('login') || friendlyError.includes('empty media') || friendlyError.toLowerCase().includes('cookie') || friendlyError.includes('401'))) {
-      friendlyError = "Instagram requires cookies to download Reels. To download this Reel:\n\n" +
-                      "1. Open Chrome, Edge, or Firefox and log into your Instagram account.\n" +
-                      "2. Close your browser completely (to unlock its cookie file) and click Convert again;\n\n" +
-                      "OR: Export your Instagram cookies to a 'cookies.txt' file in Netscape format (using a browser extension like 'Get cookies.txt LOCALLY') and save it in the project root folder.";
+      if (isCloudServer) {
+        friendlyError = "Instagram requires cookies to download Reels.\n\n" +
+                        "Since this website is hosted on Render, you must place your exported 'cookies.txt' file (in Netscape format) in your GitHub repository's root folder and redeploy.";
+      } else {
+        friendlyError = "Instagram requires cookies to download Reels. To download this Reel:\n\n" +
+                        "1. Open Chrome, Edge, or Firefox and log into your Instagram account.\n" +
+                        "2. Close your browser completely (to unlock its cookie file) and click Convert again;\n\n" +
+                        "OR: Export your Instagram cookies to a 'cookies.txt' file in Netscape format (using a browser extension like 'Get cookies.txt LOCALLY') and save it in the project root folder.";
+      }
+    } else if (friendlyError.toLowerCase().includes('confirm you are not a bot') || friendlyError.toLowerCase().includes('sign in') || friendlyError.toLowerCase().includes('bot')) {
+      if (isCloudServer) {
+        friendlyError = "This download was blocked by bot-detection. Cloud provider IP addresses (like Render) are heavily rate-limited by YouTube.\n\n" +
+                        "To resolve this, you must run this website locally on your computer, OR place a 'cookies.txt' file in your GitHub repository root folder and redeploy.";
+      } else {
+        friendlyError = "YouTube bot-protection triggered. Please try playing the video in your browser first, or export your browser cookies to a 'cookies.txt' file in the project folder.";
+      }
     }
     tasks[taskId].error = friendlyError;
   }
