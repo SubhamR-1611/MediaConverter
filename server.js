@@ -120,11 +120,11 @@ async function runConversion(taskId, url, format, withAudio) {
     } else { // mp4
       options.mergeOutputFormat = 'mp4';
       if (withAudio) {
-        // Best video stream (up to MP4) + best audio stream merged into MP4
-        options.format = 'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]';
+        // Try MP4 first, fall back to best available video + best audio and merge into MP4
+        options.format = 'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bestvideo+bestaudio/best';
       } else {
-        // Video only stream in MP4 format
-        options.format = 'bv*[ext=mp4]/b[ext=mp4]';
+        // Try MP4 video first, fall back to best video only
+        options.format = 'bv*[ext=mp4]/b[ext=mp4]/bestvideo/best';
       }
     }
 
